@@ -11,8 +11,16 @@ type Props = {}
 
 export const Navbar = (props: Props) => {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [active, setActive] = useState('Explore NFTs')
+  const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   return (
     <nav className="flexBetween fixed z-10 w-full flex-row border-b border-nft-gray-1 bg-white p-4 dark:border-nft-black-1 dark:bg-nft-dark">
@@ -65,10 +73,48 @@ export const Navbar = (props: Props) => {
       </div>
 
       <div className="flex md:hidden">
-        <MenuItems isMobile={false} active={active} setActive={setActive} />
+        <MenuItems active={active} setActive={setActive} />
         <div className="ml-4">
           <ButtonGroup setActive={setActive} router={router} />
         </div>
+      </div>
+
+      <div className="ml-2 hidden md:flex">
+        {isOpen ? (
+          <Image
+            src={images.cross}
+            objectFit="contain"
+            width={20}
+            height={20}
+            alt="cross"
+            onClick={() => setIsOpen(false)}
+            className={`cursor-pointer ${
+              theme === 'light' ? ' invert filter' : undefined
+            }`}
+          />
+        ) : (
+          <Image
+            src={images.menu}
+            objectFit="contain"
+            width={25}
+            height={25}
+            alt="menu"
+            onClick={() => setIsOpen(true)}
+            className={`cursor-pointer ${
+              theme === 'light' ? 'invert filter' : undefined
+            }`}
+          />
+        )}
+        {isOpen && (
+          <div className="nav-h fixed inset-0 top-65 z-10 flex flex-col justify-between bg-white dark:bg-nft-dark">
+            <div className="flex-1 p-4">
+              <MenuItems isMobile active={active} setActive={setActive} />
+            </div>
+            <div className="border-t border-nft-gray-1 p-4 dark:border-nft-black-1">
+              <ButtonGroup setActive={setActive} router={router} />
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   )

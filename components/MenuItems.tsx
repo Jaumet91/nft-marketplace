@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 type Props = {
-  isMobile: boolean
+  isMobile?: boolean
   active: string
   setActive: Dispatch<SetStateAction<string>>
 }
@@ -46,7 +46,6 @@ export const MenuItems = ({ isMobile, active, setActive }: Props) => {
 }
 
 MenuItems.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
   active: PropTypes.string.isRequired,
   setActive: PropTypes.func.isRequired
 }
