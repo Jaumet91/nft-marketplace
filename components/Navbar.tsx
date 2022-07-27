@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import images from '../assets'
-import { MenuItems } from './'
+import { MenuItems, ButtonGroup } from './'
 
 type Props = {}
 
@@ -55,7 +55,7 @@ export const Navbar = (props: Props) => {
           />
           <label
             htmlFor="checkbox"
-            className="flexBetween label relative h-4 w-8 rounded-2xl bg-black p-1">
+            className="flexBetween label relative h-4 w-8 cursor-pointer rounded-2xl bg-black p-1">
             <i className="fas fa-sun" />
             <i className="fas fa-moon" />
             <div className="ball absolute h-3 w-3 rounded-full bg-white" />
@@ -64,9 +64,10 @@ export const Navbar = (props: Props) => {
       </div>
 
       <div className="flex md:hidden">
-        <ul className="flexCenter list-none flex-row">
-          <MenuItems isMobile={false} active={active} setActive={setActive} />
-        </ul>
+        <MenuItems isMobile={false} active={active} setActive={setActive} />
+        <div className="ml-4">
+          <ButtonGroup />
+        </div>
       </div>
     </nav>
   )

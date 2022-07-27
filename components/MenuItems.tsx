@@ -30,7 +30,9 @@ export const MenuItems = ({ isMobile, active, setActive }: Props) => {
       {['Explore NFTs', 'Listed NFTs', 'My NFTs'].map((item, i) => (
         <li
           key={i}
-          onClick={() => {}}
+          onClick={() => {
+            setActive(item)
+          }}
           className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white ${
             active === item
               ? 'text-nft-black-1 dark:text-white'
@@ -46,5 +48,5 @@ export const MenuItems = ({ isMobile, active, setActive }: Props) => {
 MenuItems.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   active: PropTypes.string.isRequired,
-  setActive: PropTypes.string.isRequired
+  setActive: PropTypes.func.isRequired
 }
