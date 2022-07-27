@@ -1,5 +1,9 @@
+import { Button } from './'
+
 type Props = {}
 
 export const ButtonGroup = (props: Props) => {
-  return <div>btn</div>
+  const hasConnected = false
+
+  return hasConnected ? <Button /> : <Button />
 }
