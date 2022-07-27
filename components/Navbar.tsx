@@ -5,11 +5,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import images from '../assets'
+import { MenuItems } from './'
 
 type Props = {}
 
 export const Navbar = (props: Props) => {
   const { theme, setTheme } = useTheme()
+  const [active, setActive] = useState('Explore NFTs')
 
   return (
     <nav className="flexBetween fixed z-10 w-full flex-row border-b border-nft-gray-1 bg-white p-4 dark:border-nft-black-1 dark:bg-nft-dark">
@@ -61,7 +63,11 @@ export const Navbar = (props: Props) => {
         </div>
       </div>
 
-      <div className="flex md:hidden">MenuItem</div>
+      <div className="flex md:hidden">
+        <ul className="flexCenter list-none flex-row">
+          <MenuItems isMobile={false} active={active} setActive={setActive} />
+        </ul>
+      </div>
     </nav>
   )
 }
