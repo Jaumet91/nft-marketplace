@@ -17,8 +17,7 @@ export const Navbar = (props: Props) => {
         <Link href="/">
           <div
             className="flexCenter cursor-pointer md:hidden"
-            onClick={() => {}}
-          >
+            onClick={() => {}}>
             <Image
               src={images.logo02}
               objectFit="contain"
@@ -43,6 +42,26 @@ export const Navbar = (props: Props) => {
           </div>
         </Link>
       </div>
+
+      <div className="flex flex-initial flex-row justify-end">
+        <div className="mr-2 flex items-center">
+          <input
+            type="checkbox"
+            className="checkbox"
+            id="checkbox"
+            onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          />
+          <label
+            htmlFor="checkbox"
+            className="flexBetween label relative h-4 w-8 rounded-2xl bg-black p-1">
+            <i className="fas fa-sun" />
+            <i className="fas fa-moon" />
+            <div className="ball absolute h-3 w-3 rounded-full bg-white" />
+          </label>
+        </div>
+      </div>
+
+      <div className="flex md:hidden">MenuItem</div>
     </nav>
   )
 }
