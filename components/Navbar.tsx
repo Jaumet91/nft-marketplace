@@ -12,6 +12,7 @@ type Props = {}
 export const Navbar = (props: Props) => {
   const { theme, setTheme } = useTheme()
   const [active, setActive] = useState('Explore NFTs')
+  const router = useRouter()
 
   return (
     <nav className="flexBetween fixed z-10 w-full flex-row border-b border-nft-gray-1 bg-white p-4 dark:border-nft-black-1 dark:bg-nft-dark">
@@ -66,7 +67,7 @@ export const Navbar = (props: Props) => {
       <div className="flex md:hidden">
         <MenuItems isMobile={false} active={active} setActive={setActive} />
         <div className="ml-4">
-          <ButtonGroup />
+          <ButtonGroup setActive={setActive} router={router} />
         </div>
       </div>
     </nav>
