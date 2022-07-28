@@ -1,6 +1,4 @@
-type Props = {}
-
-export const SkeletonFooter = (props: Props) => {
+export const SkeletonFooter = () => {
   return (
     <footer className="flexCenter bordet-t w-screen flex-col justify-between py-16 sm:py-8">
       <div className="flex w-full flex-row px-16 md:flex-col sm:px-4 minmd:w-4/5">

@@ -1,6 +1,4 @@
-type Props = {}
-
-export const SkeletonNavbar = (props: Props) => {
+export const SkeletonNavbar = () => {
   return (
     <nav className="flexBetween fixed w-full flex-row border-nft-black-1 bg-nft-dark p-4">
       <div className="flex flex-1 animate-pulse flex-row items-center justify-start">

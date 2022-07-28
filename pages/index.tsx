@@ -3,7 +3,7 @@ import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import type { NextPage } from 'next'
 
-import { Banner, CreatorCard } from '../components'
+import { Banner, CreatorCard, NFTCard } from '../components'
 import images from '../assets'
 import { makeId } from '../utils/makeId'
 import { SkeletonHome } from '../components/Skeleton'
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
                   key={`creator-${i}`}
                   rank={i}
                   creatorImage={images[`creator${i}` as keyof typeof images]}
-                  creatorName={`0x${makeId(3)}...${makeId(3)}`}
+                  creatorName={`0x${makeId(3)}...${makeId(4)}`}
                   creatorEths={10 - i * 0.5}
                 />
               ))}
@@ -112,6 +112,29 @@ const Home: NextPage = () => {
                 </>
               )}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div className="flexBetween mx-4 sm:flex-col sm:items-start xs:mx-0 minlg:mx-8">
+            <h1 className="flex-1 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white sm:mb-4 minlg:text-4xl">
+              Hot Bids
+            </h1>
+            <div>SearchBar</div>
+          </div>
+          <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+              <NFTCard
+                key={`nft-${i}`}
+                nft={{
+                  i,
+                  name: `Nifty NFT ${i}`,
+                  seller: `0x${makeId(3)}...${makeId(4)}`,
+                  owner: `0x${makeId(3)}...${makeId(4)}`,
+                  description: 'Cool NFT on Sale'
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
