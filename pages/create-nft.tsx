@@ -7,7 +7,6 @@ import { useTheme } from 'next-themes'
 import { Button, Input } from '../components'
 import images from '../assets'
 import { SkeletonCreateNFTs } from '../components/Skeleton'
-
 const CreateNFT = () => {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -91,8 +90,28 @@ const CreateNFT = () => {
           inputType="input"
           title="Name"
           placeholder="NFT Name"
-          handleClick={() => {}}
+          handleInputChange={() => {}}
         />
+        <Input
+          inputType="textarea"
+          title="Description"
+          placeholder="NFT Description"
+          handleTextChange={() => {}}
+        />
+        <Input
+          inputType="number"
+          title="Price"
+          placeholder="NFT Price"
+          handleInputChange={() => {}}
+        />
+
+        <div className="mt-7 flex w-full justify-end">
+          <Button
+            btnName="Create NFT"
+            classStyles="rounded-xl"
+            handleClick={() => {}}
+          />
+        </div>
       </div>
     </div>
   )
