@@ -7,9 +7,7 @@ import { Button } from '..'
 import { SkeletonFooter } from '../Skeleton'
 import { FooterLinks } from './'
 
-type Props = {}
-
-export const Footer = (props: Props) => {
+export const Footer = () => {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
 

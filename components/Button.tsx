@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { MouseEventHandler } from 'react'
+
 type Props = {
   classStyles: string
   btnName: string

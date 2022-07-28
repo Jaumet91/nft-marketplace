@@ -35,6 +35,17 @@
   scrollbar-width: none; /* Firefox */
 }
 
+/* Hide arrows for number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .checkbox {
   opacity: 0;
   position: absolute;

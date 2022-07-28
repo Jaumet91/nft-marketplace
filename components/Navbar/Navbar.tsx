@@ -8,9 +8,7 @@ import images from '../../assets'
 import { MenuItems, ButtonGroup } from './'
 import { SkeletonNavbar } from '../Skeleton'
 
-type Props = {}
-
-export const Navbar = (props: Props) => {
+export const Navbar = () => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [active, setActive] = useState('Explore NFTs')
