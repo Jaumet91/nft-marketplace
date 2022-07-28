@@ -59,6 +59,15 @@ export const Footer = (props: Props) => {
             heading="CryptoHue"
             items={['Explore', 'How it Works', 'Contact Us']}
           />
+          <FooterLinks
+            heading="Support"
+            items={[
+              'Help Center',
+              'Terms of Service',
+              'Legal',
+              'Privacy Policy'
+            ]}
+          />
         </div>
       </div>
 
