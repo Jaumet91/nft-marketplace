@@ -131,7 +131,9 @@ const Home: NextPage = () => {
                   name: `Nifty NFT ${i}`,
                   seller: `0x${makeId(3)}...${makeId(4)}`,
                   owner: `0x${makeId(3)}...${makeId(4)}`,
-                  description: 'Cool NFT on Sale'
+                  description: 'Cool NFT on Sale',
+                  image: '',
+                  price: (10 - i * 0.534).toFixed(2)
                 }}
               />
             ))}
