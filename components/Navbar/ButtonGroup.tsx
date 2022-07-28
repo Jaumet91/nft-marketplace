@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { NextRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
-import { Button } from './'
+import { Button } from '../'
 
 type Props = { setActive: Dispatch<SetStateAction<string>>; router: NextRouter }
 
