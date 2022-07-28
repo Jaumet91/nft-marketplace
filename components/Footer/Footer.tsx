@@ -21,7 +21,7 @@ export const Footer = (props: Props) => {
 
   return (
     <footer className="flexCenter bordet-t flex-col border-nft-gray-1 py-16 dark:border-nft-black-1 sm:py-8">
-      <div className=" sm:py- flex w-full flex-row px-16 md:flex-col sm:px-4 minmd:w-4/5">
+      <div className="flex w-full flex-row px-16 md:flex-col sm:px-4 minmd:w-4/5">
         <div className="flexStart flex-1 flex-col">
           <div className="flexCenter cursor-pointer">
             <Image
