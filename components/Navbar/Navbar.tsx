@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
@@ -108,7 +108,7 @@ export const Navbar = (props: Props) => {
           />
         )}
         {isOpen && (
-          <div className="nav-h fixed inset-0 top-65 z-10 flex flex-col justify-between bg-white dark:bg-nft-dark">
+          <div className="nav-h fixed inset-0 top-65 z-10 flex animate-slide-in flex-col justify-between bg-white dark:bg-nft-dark">
             <div className="flex-1 p-4">
               <MenuItems isMobile active={active} setActive={setActive} />
             </div>
