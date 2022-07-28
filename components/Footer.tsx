@@ -20,7 +20,39 @@ export const Footer = (props: Props) => {
 
   return (
     <footer className="flexCenter bordet-t flex-col border-nft-gray-1 py-16 dark:border-nft-black-1 sm:py-8">
-      <div className="flexCenter mt-5 w-full border-t border-nft-gray-1 px-16 dark:border-nft-black-1 sm:px-4"></div>
+      <div className=" sm:py- flex w-full flex-row px-16 md:flex-col sm:px-4 minmd:w-4/5">
+        <div className="flexStart flex-1 flex-col">
+          <div className="flexCenter cursor-pointer">
+            <Image
+              src={images.logo02}
+              objectFit="contain"
+              width={32}
+              height={32}
+              alt="logo"
+            />
+            <p className="ml-1 text-lg font-semibold text-nft-black-1 dark:text-white">
+              CryptoHue
+            </p>
+          </div>
+          <p className="mt-6 font-poppins text-base font-semibold text-nft-black-1 dark:text-white">
+            Get the latest Updates
+          </p>
+          <div className="flexBetween mt-6 w-357 rounded-md border border-nft-gray-2 bg-white dark:border-nft-black-2 dark:bg-nft-black-2 md:w-full minlg:w-557">
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="h-full w-full flex-1 rounded-md bg-white px-4 text-xs font-normal text-nft-black-1 outline-none dark:bg-nft-black-2 dark:text-white minlg:text-lg"
+            />
+            <div className="flex-initial">
+              <Button
+                btnName="Email me"
+                classStyles="rounded-md"
+                handleClick={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="flexCenter mt-5 w-full border-t border-nft-gray-1 px-16 dark:border-nft-black-1 sm:px-4">
         <div className="flexBetween mt-7 w-full flex-row sm:flex-col minmd:w-4/5">
