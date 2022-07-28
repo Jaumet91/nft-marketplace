@@ -17,14 +17,18 @@ export const Input = ({
   handleTextChange
 }: Props) => (
   <div className="mt-10 w-full">
-    <p className="font-poppins text-xl font-semibold text-nft-black-1 dark:text-white">
+    <label
+      htmlFor={inputType}
+      className="font-poppins text-xl font-semibold text-nft-black-1 dark:text-white">
       {title}
-    </p>
+    </label>
     {inputType === 'number' ? (
       <div className="flexBetween mt-4 w-full flex-row rounded-lg border border-nft-gray-2 bg-white px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white">
         <input
           type="number"
-          className="outiline-none flex w-full bg-white dark:bg-nft-black-1"
+          id="number"
+          name="number"
+          className="flex w-full bg-white outline-none dark:bg-nft-black-1"
           placeholder={placeholder}
           onChange={handleInputChange}
         />
@@ -34,6 +38,8 @@ export const Input = ({
       </div>
     ) : inputType === 'textarea' ? (
       <textarea
+        id="textarea"
+        name="textarea"
         rows={10}
         className="mt-4 w-full rounded-lg border border-nft-gray-2 bg-white px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white"
         placeholder={placeholder}
@@ -41,6 +47,8 @@ export const Input = ({
       />
     ) : (
       <input
+        id="number"
+        name="number"
         className="mt-4 w-full rounded-lg border border-nft-gray-2 bg-white px-4 py-3 font-poppins text-base text-nft-gray-2 outline-none dark:border-nft-black-1 dark:bg-nft-black-1 dark:text-white"
         placeholder={placeholder}
         onChange={handleInputChange}

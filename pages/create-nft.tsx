@@ -11,6 +11,11 @@ const CreateNFT = () => {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [fileUrl, setFileUrl] = useState(null)
+  const [formInput, setFormInput] = useState({
+    price: '',
+    name: '',
+    description: ''
+  })
 
   const onDrop = useCallback(() => {
     // upLoad image to ipfs
@@ -24,7 +29,7 @@ const CreateNFT = () => {
     isDragReject
   } = useDropzone({
     onDrop,
-    // accept: 'image/*',
+    accept: { 'image/*': ['.jpeg', '.jpg', '.png', '.gif', '.svg', '.webm'] },
     maxSize: 5000000
   })
 
@@ -90,19 +95,25 @@ const CreateNFT = () => {
           inputType="input"
           title="Name"
           placeholder="NFT Name"
-          handleInputChange={() => {}}
+          handleInputChange={(e) =>
+            setFormInput({ ...formInput, name: e.target.value })
+          }
         />
         <Input
           inputType="textarea"
           title="Description"
           placeholder="NFT Description"
-          handleTextChange={() => {}}
+          handleTextChange={(e) =>
+            setFormInput({ ...formInput, description: e.target.value })
+          }
         />
         <Input
           inputType="number"
           title="Price"
           placeholder="NFT Price"
-          handleInputChange={() => {}}
+          handleInputChange={(e) =>
+            setFormInput({ ...formInput, price: e.target.value })
+          }
         />
 
         <div className="mt-7 flex w-full justify-end">
