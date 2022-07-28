@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
-import images from '../assets'
-import { Button } from './'
-import { SkeletonFooter } from './Skeleton'
+import images from '../../assets'
+import { Button } from '..'
+import { SkeletonFooter } from '../Skeleton'
+import { FooterLinks } from './'
 
 type Props = {}
 
@@ -51,6 +52,13 @@ export const Footer = (props: Props) => {
               />
             </div>
           </div>
+        </div>
+
+        <div className="flexBetweenStart ml-10 flex-1 flex-wrap md:ml-0 md:mt-8">
+          <FooterLinks
+            heading="CryptoHue"
+            items={['Explore', 'How it Works', 'Contact Us']}
+          />
         </div>
       </div>
 
