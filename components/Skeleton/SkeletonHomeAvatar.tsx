@@ -2,7 +2,7 @@ export const SkeletonHomeAvatar = () => (
   <div className="flex-col">
     <div className="mt-4 flex items-center">
       <svg
-        className="h-14 w-14 text-slate-700"
+        className="h-14 w-14 text-gray-400 dark:text-gray-600"
         aria-hidden="true"
         fill="currentColor"
         viewBox="0 0 20 20"
@@ -13,13 +13,13 @@ export const SkeletonHomeAvatar = () => (
           clipRule="evenodd"></path>
       </svg>
       <div>
-        <div className="mb-2 h-2.5 w-32 rounded-full bg-slate-700"></div>
-        <div className="h-2 w-28 rounded-full bg-slate-700"></div>
+        <div className="mb-2 h-2.5 w-32 rounded-full bg-gray-300 dark:bg-slate-700"></div>
+        <div className="h-2 w-28 rounded-full bg-gray-300 dark:bg-slate-700"></div>
       </div>
     </div>
-    <div className="mt-2 h-2 w-40 rounded-full bg-slate-700"></div>
-    <div className="mt-2 h-2 w-48 rounded-full bg-slate-700"></div>
-    <div className="mt-2 h-2 w-40 rounded-full bg-slate-700"></div>
-    <div className="mt-2 h-2 w-48 rounded-full bg-slate-700"></div>
+    <div className="mt-2 h-2 w-40 rounded-full bg-gray-300 dark:bg-slate-700"></div>
+    <div className="mt-2 h-2 w-48 rounded-full bg-gray-300 dark:bg-slate-700"></div>
+    <div className="mt-2 h-2 w-40 rounded-full bg-gray-300 dark:bg-slate-700"></div>
+    <div className="mt-2 h-2 w-48 rounded-full bg-gray-300 dark:bg-slate-700"></div>
   </div>
 )
