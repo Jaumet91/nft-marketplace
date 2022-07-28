@@ -9,10 +9,46 @@ import { makeId } from '../utils/makeId'
 import { SkeletonHome } from '../components/Skeleton'
 
 const Home: NextPage = () => {
-  const { theme } = useTheme()
-  const parentRef = useRef(null)
-  const scrollRef = useRef(null)
   const [mounted, setMounted] = useState(false)
+  const { theme } = useTheme()
+  const [hideButtons, setHideButtons] = useState(false)
+  const parentRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = (direction: string) => {
+    const { current } = scrollRef
+    const scrollAmount = window.innerWidth > 1800 ? 270 : 210
+    if (current) {
+      switch (direction) {
+        case 'left':
+          current.scrollLeft -= scrollAmount
+          break
+        case 'right':
+          current.scrollLeft += scrollAmount
+          break
+      }
+    }
+  }
+
+  const isScrollable = () => {
+    const { current } = scrollRef
+    const { current: parent } = parentRef
+
+    if (current && parent) {
+      current?.scrollWidth >= parent?.offsetWidth
+        ? setHideButtons(false)
+        : setHideButtons(true)
+    }
+  }
+
+  useEffect(() => {
+    isScrollable()
+    window.addEventListener('resize', isScrollable)
+
+    return () => {
+      window.removeEventListener('resize', isScrollable)
+    }
+  })
 
   useEffect(() => {
     setMounted(true)
@@ -45,28 +81,36 @@ const Home: NextPage = () => {
                   creatorEths={10 - i * 0.5}
                 />
               ))}
-              <div
-                onClick={() => {}}
-                className="absolute top-45 left-0 h-8 w-8 cursor-pointer minlg:h-12 minlg:w-12">
-                <Image
-                  src={images.left}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="left_arrow"
-                  className={theme === 'light' ? 'invert filter' : undefined}
-                />
-              </div>
-              <div
-                onClick={() => {}}
-                className="absolute right-0 top-45 h-8 w-8 cursor-pointer minlg:h-12 minlg:w-12">
-                <Image
-                  src={images.right}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="left_arrow"
-                  className={theme === 'light' ? 'invert filter' : undefined}
-                />
-              </div>
+              {!hideButtons && (
+                <>
+                  <div
+                    onClick={() => handleScroll('left')}
+                    className="absolute top-45 left-0 h-8 w-8 cursor-pointer minlg:h-12 minlg:w-12">
+                    <Image
+                      src={images.left}
+                      layout="fill"
+                      objectFit="contain"
+                      alt="left_arrow"
+                      className={
+                        theme === 'light' ? 'invert filter' : undefined
+                      }
+                    />
+                  </div>
+                  <div
+                    onClick={() => handleScroll('right')}
+                    className="absolute right-0 top-45 h-8 w-8 cursor-pointer minlg:h-12 minlg:w-12">
+                    <Image
+                      src={images.right}
+                      layout="fill"
+                      objectFit="contain"
+                      alt="left_arrow"
+                      className={
+                        theme === 'light' ? 'invert filter' : undefined
+                      }
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
