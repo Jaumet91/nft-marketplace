@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 type Props = { heading: string; items: string[] }
 
 export const FooterLinks = ({ heading, items }: Props) => (
@@ -14,3 +16,8 @@ export const FooterLinks = ({ heading, items }: Props) => (
     ))}
   </div>
 )
+
+FooterLinks.propTypes = {
+  heading: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired
+}

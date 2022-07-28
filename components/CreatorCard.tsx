@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Image, { StaticImageData } from 'next/image'
 
 import images from '../assets'
@@ -52,3 +53,10 @@ export const CreatorCard = ({
     </div>
   </div>
 )
+
+CreatorCard.propTypes = {
+  rank: PropTypes.number.isRequired,
+  creatorImage: PropTypes.object.isRequired,
+  creatorName: PropTypes.string.isRequired,
+  creatorEths: PropTypes.number.isRequired
+}
