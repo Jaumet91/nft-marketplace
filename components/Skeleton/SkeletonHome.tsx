@@ -1,4 +1,4 @@
-import { SkeletonHomeAvatar } from './'
+import { SkeletonHomeAvatar, SkeletonHomeNFTs } from './'
 
 export const SkeletonHome = () => {
   return (
@@ -6,7 +6,7 @@ export const SkeletonHome = () => {
       <div className="w-full flex-col p-12  sm:px-4 minmd:w-4/5">
         <div className="mb-10 flex h-72 items-center justify-center rounded-3xl bg-slate-700 sm:h-60 xs:h-44 xs:p-4 ">
           <svg
-            className="h-12 w-12 text-gray-200"
+            className="h-12 w-12 text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             fill="currentColor"
@@ -23,6 +23,13 @@ export const SkeletonHome = () => {
             <SkeletonHomeAvatar />
             <SkeletonHomeAvatar />
           </div>
+        </div>
+        <div className="mt-32 mb-10 h-4 w-48 rounded-full bg-slate-600"></div>
+        <div className="flex space-x-10">
+          <SkeletonHomeNFTs />
+          <SkeletonHomeNFTs />
+          <SkeletonHomeNFTs />
+          <SkeletonHomeNFTs />
         </div>
       </div>
     </div>
