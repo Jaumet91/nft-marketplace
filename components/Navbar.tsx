@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import images from '../assets'
-import { MenuItems, ButtonGroup, SkeletonNavbar } from './'
+import { MenuItems, ButtonGroup } from './'
+import { SkeletonNavbar } from './Skeleton'
 
 type Props = {}
 
@@ -17,8 +18,8 @@ export const Navbar = (props: Props) => {
   const router = useRouter()
 
   useEffect(() => {
-    setTimeout(() => setMounted(true), 1500)
     setTheme('dark')
+    setMounted(true)
   }, [])
 
   if (!mounted) return <SkeletonNavbar />
