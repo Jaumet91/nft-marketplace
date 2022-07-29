@@ -43,6 +43,7 @@ contract NFTMarketplace is ERC721URIStorage {
             owner == msg.sender,
             "Only marketplace owner can update the listing price."
         );
+
         listingPrice = _listingPrice;
     }
 
@@ -60,9 +61,34 @@ contract NFTMarketplace is ERC721URIStorage {
 
         _mint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, tokenURI);
-
         createMarketItem(newTokenId, price);
 
         return newTokenId;
+    }
+
+    function createMarketItem(uint256 tokenId, uint256 price) private {
+        require(price > 0, "Price must be at least 1");
+        require(
+            msg.value == listingPrice,
+            "Price must be equal to listing price"
+        );
+
+        idToMarketItem[tokenId] = MarketItem(
+            tokenId,
+            payable(msg.sender),
+            payable(address(this)),
+            price,
+            false
+        );
+
+        _transfer(msg.sender, address(this), tokenId);
+
+        emit MarketItemCreated(
+            tokenId,
+            msg.sender,
+            address(this),
+            price,
+            false
+        );
     }
 }
