@@ -34,7 +34,7 @@ contract NFTMarketplace is ERC721URIStorage {
         bool sold
     );
 
-    constructor() {
+    constructor() ERC721("CryptoHue Tokens", "CHT") {
         owner = payable(msg.sender);
     }
 
