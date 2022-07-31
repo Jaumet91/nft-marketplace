@@ -2,7 +2,11 @@ import { useState, useEffect, createContext } from 'react'
 import Web3Modal from 'web3modal'
 import { ethers } from 'ethers'
 import axios from 'axios'
-import { create as ipfsHttpClient } from 'ipfs-http-client'
+import {
+  create as ipfsHttpClient,
+  IPFSHTTPClient,
+  Options
+} from 'ipfs-http-client'
 
 import { MarketAddress, MarketAddressABI } from './constants'
 
@@ -18,7 +22,7 @@ interface props {
   children: JSX.Element | JSX.Element[]
 }
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0' as Options)
 
 export const NFTContext = createContext<NFTContextProps>({} as NFTContextProps)
 
