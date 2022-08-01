@@ -5,7 +5,7 @@ type Props = { name: string; childStyles: string; parentStyles: string }
 export const Banner = ({ name, childStyles, parentStyles }: Props) => {
   return (
     <div
-      className={`nft-gradient relative z-0 flex items-center overflow-hidden ${parentStyles} `}>
+      className={`nft-gradient relative z-0 flex items-center overflow-hidden ${parentStyles}`}>
       <p
         className={`font-poppins text-5xl font-bold leading-70 ${childStyles}`}>
         {name}
