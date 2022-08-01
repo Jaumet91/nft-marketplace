@@ -10,8 +10,9 @@ import images from '../assets'
 import { SkeletonCreateNFTs } from '../components/Skeleton'
 
 const CreateNFT = () => {
-  const { uploadToIPFS } = useContext(NFTContext)
+  const router = useRouter()
   const { theme } = useTheme()
+  const { uploadToIPFS, createNFT } = useContext(NFTContext)
   const [mounted, setMounted] = useState(false)
   const [fileUrl, setFileUrl] = useState<string | undefined>(undefined)
   const [formInput, setFormInput] = useState({
@@ -23,7 +24,6 @@ const CreateNFT = () => {
   const onDrop = useCallback(async (acceptedFile: File[]) => {
     // upLoad image to ipfs
     const url = await uploadToIPFS(acceptedFile[0])
-    console.log({ url })
     setFileUrl(url)
   }, [])
 
@@ -126,7 +126,7 @@ const CreateNFT = () => {
           <Button
             btnName="Create NFT"
             classStyles="rounded-xl"
-            handleClick={() => {}}
+            handleClick={() => createNFT(formInput, fileUrl, router)}
           />
         </div>
       </div>
