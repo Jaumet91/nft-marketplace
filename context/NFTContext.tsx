@@ -21,6 +21,7 @@ interface NFTContextProps {
     fileUrl: string | undefined,
     router: NextRouter
   ) => Promise<void>
+  fetchNFTs: () => Promise<any[]>
 }
 
 interface props {
@@ -30,8 +31,11 @@ interface props {
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0' as Options)
 
-const fetchContract = (signerOrProvider: ethers.providers.JsonRpcSigner) =>
-  new ethers.Contract(MarketAddress, MarketAddressABI, signerOrProvider)
+const fetchContract = (
+  signerOrProvider:
+    | ethers.providers.JsonRpcSigner
+    | ethers.providers.JsonRpcProvider
+) => new ethers.Contract(MarketAddress, MarketAddressABI, signerOrProvider)
 
 export const NFTContext = createContext<NFTContextProps>({} as NFTContextProps)
 
@@ -122,6 +126,50 @@ export const NFTProvider = ({ children }: props) => {
     await transaction.wait()
   }
 
+  const fetchNFTs = async () => {
+    const provider = new ethers.providers.JsonRpcProvider()
+    const contract = fetchContract(provider)
+
+    const data = await contract.fetchMarketItems()
+    const items = await Promise.all(
+      data.map(
+        async ({
+          tokenId,
+          seller,
+          owner,
+          price: unformattedPrice
+        }: {
+          tokenId: any
+          seller: string
+          owner: string
+          price: number
+        }) => {
+          const tokenURI = await contract.tokenURI(tokenId)
+          const {
+            data: { image, name, description }
+          } = await axios.get(tokenURI)
+
+          const price = ethers.utils.formatUnits(
+            unformattedPrice.toString(),
+            'ether'
+          )
+
+          return {
+            price,
+            tokenId: tokenId.toNumber(),
+            seller,
+            owner,
+            image,
+            name,
+            description,
+            tokenURI
+          }
+        }
+      )
+    )
+    return items
+  }
+
   return (
     <NFTContext.Provider
       value={{
@@ -129,7 +177,8 @@ export const NFTProvider = ({ children }: props) => {
         connectWallet,
         currentAccount,
         uploadToIPFS,
-        createNFT
+        createNFT,
+        fetchNFTs
       }}>
       {children}
     </NFTContext.Provider>
