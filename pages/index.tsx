@@ -21,7 +21,6 @@ const Home: NextPage = () => {
   useEffect(() => {
     fetchNFTs().then((items) => {
       setNfts(items)
-      console.log(items)
     })
   }, [])
 

@@ -22,11 +22,19 @@ interface NFTContextProps {
     router: NextRouter
   ) => Promise<void>
   fetchNFTs: () => Promise<any[]>
+  fetchMyNFTsOrListedNFTs: (type: string) => Promise<any[]>
 }
 
 interface props {
   // eslint-disable-next-line no-undef
   children: JSX.Element | JSX.Element[]
+}
+
+interface items {
+  tokenId: any
+  seller: string
+  owner: string
+  price: number
 }
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0' as Options)
@@ -133,17 +141,49 @@ export const NFTProvider = ({ children }: props) => {
     const data = await contract.fetchMarketItems()
     const items = await Promise.all(
       data.map(
-        async ({
-          tokenId,
-          seller,
-          owner,
-          price: unformattedPrice
-        }: {
-          tokenId: any
-          seller: string
-          owner: string
-          price: number
-        }) => {
+        async ({ tokenId, seller, owner, price: unformattedPrice }: items) => {
+          const tokenURI = await contract.tokenURI(tokenId)
+          const {
+            data: { image, name, description }
+          } = await axios.get(tokenURI)
+
+          const price = ethers.utils.formatUnits(
+            unformattedPrice.toString(),
+            'ether'
+          )
+
+          return {
+            price,
+            tokenId: tokenId.toNumber(),
+            seller,
+            owner,
+            image,
+            name,
+            description,
+            tokenURI
+          }
+        }
+      )
+    )
+    return items
+  }
+
+  const fetchMyNFTsOrListedNFTs = async (type: string) => {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    const contract = fetchContract(signer)
+
+    const data =
+      type === 'fetchItemsListed'
+        ? await contract.fetchItemsListed()
+        : await contract.fetchMyNFTs()
+
+    const items = await Promise.all(
+      data.map(
+        async ({ tokenId, seller, owner, price: unformattedPrice }: items) => {
           const tokenURI = await contract.tokenURI(tokenId)
           const {
             data: { image, name, description }
@@ -178,7 +218,8 @@ export const NFTProvider = ({ children }: props) => {
         currentAccount,
         uploadToIPFS,
         createNFT,
-        fetchNFTs
+        fetchNFTs,
+        fetchMyNFTsOrListedNFTs
       }}>
       {children}
     </NFTContext.Provider>
