@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import images from '../assets'
 import { NFTContext } from '../context/NFTContext'
+import { shortenAddresss } from '../utils/shortenAddress'
 
 type Props = {
   nft: {
@@ -41,7 +42,9 @@ export const NFTCard = ({ nft }: Props) => {
               {nft.price} <span className="normal">{nftCurrency}</span>
             </p>
             <p className="font-poppins text-sm font-semibold text-nft-black-1 dark:text-white minlg:text-lg">
-              {nft.seller}
+              {nft.seller.length > 10
+                ? shortenAddresss(nft.seller)
+                : nft.seller}
             </p>
           </div>
         </div>
