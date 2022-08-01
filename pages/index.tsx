@@ -136,7 +136,7 @@ const Home: NextPage = () => {
             {nfts.map((nft) => (
               <NFTCard key={nft.tokenId} nft={nft} />
             ))}
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+            {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
               <NFTCard
                 key={`nft-${i}`}
                 nft={{
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
                   price: (10 - i * 0.534).toFixed(2)
                 }}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
