@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, SetStateAction } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { NFTContext } from '../context/NFTContext'
 
-import { NFTCard, Button } from '../components'
+import { NFTCard, Button, Modal } from '../components'
 import { SkeletonNFTDetails } from '../components/Skeleton'
 import images from '../assets'
 import { shortenAddresss } from '../utils/shortenAddress'
 
-interface nft {
+type nft = {
   image: string
   tokenId: string
   name: string
@@ -35,7 +35,7 @@ const NFTDetails = () => {
   useEffect(() => {
     if (!router.isReady) return
 
-    setNft(router.query)
+    setNft(router.query as SetStateAction<nft>)
     setIsLoading(false)
   }, [router.isReady])
 
@@ -105,6 +105,8 @@ const NFTDetails = () => {
           )}
         </div>
       </div>
+
+      <Modal />
     </div>
   )
 }
