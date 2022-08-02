@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { NFTContext } from '../context/NFTContext'
 
-import { NFTCard, Button, Modal } from '../components'
+import { NFTCard, Button, Modal, PaymentBodyCmp } from '../components'
 import { SkeletonNFTDetails } from '../components/Skeleton'
 import images from '../assets'
 import { shortenAddresss } from '../utils/shortenAddress'
@@ -106,7 +106,10 @@ const NFTDetails = () => {
         </div>
       </div>
 
-      <Modal />
+      <Modal
+        header="Check Our"
+        body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />}
+      />
     </div>
   )
 }
