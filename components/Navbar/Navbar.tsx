@@ -44,6 +44,7 @@ export const Navbar = () => {
   const router = useRouter()
 
   useEffect(() => {
+    setTheme('dark')
     setMounted(true)
   }, [])
 
@@ -73,7 +74,12 @@ export const Navbar = () => {
           </div>
         </Link>
         <Link href="/">
-          <div className="hidden md:flex" onClick={() => {}}>
+          <div
+            className="hidden md:flex"
+            onClick={() => {
+              setActive('Explore NFTs')
+              setIsOpen(false)
+            }}>
             <Image
               src={images.logo02}
               objectFit="contain"
@@ -139,10 +145,19 @@ export const Navbar = () => {
         {isOpen && (
           <div className="nav-h fixed inset-0 top-65 z-10 flex animate-slide-in flex-col justify-between bg-white dark:bg-nft-dark">
             <div className="flex-1 p-4">
-              <MenuItems isMobile active={active} setActive={setActive} />
+              <MenuItems
+                isMobile
+                active={active}
+                setActive={setActive}
+                setIsOpen={setIsOpen}
+              />
             </div>
             <div className="border-t border-nft-gray-1 p-4 dark:border-nft-black-1">
-              <ButtonGroup setActive={setActive} router={router} />
+              <ButtonGroup
+                setActive={setActive}
+                router={router}
+                setIsOpen={setIsOpen}
+              />
             </div>
           </div>
         )}

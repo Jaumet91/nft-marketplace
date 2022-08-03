@@ -14,7 +14,7 @@ export const SkeletonHome = () => (
       </div>
       <div className="flex-col">
         <div className="mb-10 h-4 w-48 rounded-full bg-gray-200 dark:bg-slate-600"></div>
-        <div className="flex space-x-10">
+        <div className="flex space-x-10 overflow-hidden">
           <SkeletonHomeAvatar />
           <SkeletonHomeAvatar />
           <SkeletonHomeAvatar />
@@ -23,7 +23,7 @@ export const SkeletonHome = () => (
         </div>
       </div>
       <div className="mt-32 mb-10 h-4 w-48 rounded-full bg-gray-200 dark:bg-slate-600"></div>
-      <div className="flex space-x-10">
+      <div className="flex space-x-10 overflow-hidden">
         <SkeletonHomeNFTs />
         <SkeletonHomeNFTs />
         <SkeletonHomeNFTs />

@@ -56,7 +56,7 @@ export const SearchBar = ({
 
       <div
         onClick={() => setToggle((prevToggle) => !prevToggle)}
-        className="flexBetween relative ml-4 min-w-190 cursor-pointer rounded-md border border-nft-gray-2 bg-white px-4 dark:border-nft-black-2 dark:bg-nft-black-2 sm:ml-0 sm:mt-2">
+        className="flexBetween relative ml-4 min-w-190 cursor-pointer rounded-md border border-nft-gray-2 bg-white px-4 py-3 dark:border-nft-black-2 dark:bg-nft-black-2 sm:ml-0 sm:mt-2">
         <p className="font-poppins text-xs font-normal text-nft-black-1 dark:text-white">
           {activeSelect}
         </p>

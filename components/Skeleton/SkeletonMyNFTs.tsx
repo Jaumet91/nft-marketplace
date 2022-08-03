@@ -17,7 +17,7 @@ export const SkeletonMyNFTs = () => {
 
         <div className="flexCenter mt-20 w-full flex-col p-12 sm:px-4 minmd:w-4/5">
           <div className="flex w-full flex-1 flex-row px-4 sm:flex-col sm:px-0 minlg:px-8"></div>
-          <div className="mt-3 flex w-full flex-wrap space-x-8">
+          <div className="mt-3 flex w-full flex-wrap space-x-8 overflow-hidden">
             <SkeletonHomeAvatar />
             <SkeletonHomeAvatar />
             <SkeletonHomeAvatar />

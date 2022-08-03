@@ -26,7 +26,7 @@ export const NFTCard = ({ nft, onProfilePage }: Props) => {
   return (
     <Link href={{ pathname: '/nft-details', query: nft }}>
       <div className="m-4 min-w-215 max-w-max flex-1 cursor-pointer rounded-2xl bg-white p-4 shadow-md dark:bg-nft-black-3 sm:my-2 sm:mx-2 sm:w-full sm:min-w-155 xs:max-w-none minmd:min-w-256 minlg:m-8 minlg:min-w-327">
-        <div className="relative h-52 w-full overflow-hidden rounded-2xl sm:h-36 xs:h-56 minmd:h-60 minlg:h-300">
+        <div className="relative h-52 w-full overflow-hidden rounded-2xl sm:h-36 minmd:h-60 minlg:h-300">
           <Image
             src={nft.image || images[`nft${nft.i}` as keyof typeof images]}
             layout="fill"

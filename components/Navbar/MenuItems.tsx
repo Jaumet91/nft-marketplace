@@ -6,9 +6,15 @@ type Props = {
   isMobile?: boolean
   active: string
   setActive: Dispatch<SetStateAction<string>>
+  setIsOpen?: Dispatch<SetStateAction<boolean>>
 }
 
-export const MenuItems = ({ isMobile, active, setActive }: Props) => {
+export const MenuItems = ({
+  isMobile,
+  active,
+  setActive,
+  setIsOpen
+}: Props) => {
   const generateLink = (i: number) => {
     switch (i) {
       case 0:
@@ -32,6 +38,7 @@ export const MenuItems = ({ isMobile, active, setActive }: Props) => {
           key={i}
           onClick={() => {
             setActive(item)
+            if (isMobile && setIsOpen !== undefined) setIsOpen(false)
           }}
           className={`mx-3 flex flex-row items-center font-poppins text-base font-semibold hover:text-nft-dark dark:hover:text-white ${
             active === item

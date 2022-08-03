@@ -5,9 +5,13 @@ import PropTypes from 'prop-types'
 import { NFTContext } from '../../context/NFTContext'
 import { Button } from '../'
 
-type Props = { setActive: Dispatch<SetStateAction<string>>; router: NextRouter }
+type Props = {
+  setActive: Dispatch<SetStateAction<string>>
+  router: NextRouter
+  setIsOpen?: Dispatch<SetStateAction<boolean>>
+}
 
-export const ButtonGroup = ({ setActive, router }: Props) => {
+export const ButtonGroup = ({ setActive, router, setIsOpen }: Props) => {
   const { connectWallet, currentAccount } = useContext(NFTContext)
 
   return currentAccount ? (
@@ -16,6 +20,9 @@ export const ButtonGroup = ({ setActive, router }: Props) => {
       classStyles="mx-2 rounded-xl"
       handleClick={() => {
         setActive('')
+        if (setIsOpen !== undefined) {
+          setIsOpen(false)
+        }
         router.push('/create-nft')
       }}
     />
