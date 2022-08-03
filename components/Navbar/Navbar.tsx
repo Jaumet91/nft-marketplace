@@ -28,7 +28,7 @@ export const Navbar = () => {
         <Link href="/">
           <div
             className="flexCenter cursor-pointer md:hidden"
-            onClick={() => {}}>
+            onClick={() => setActive('Explore NFTs')}>
             <Image
               src={images.logo02}
               objectFit="contain"

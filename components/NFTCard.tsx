@@ -8,7 +8,7 @@ import { NFTContext } from '../context/NFTContext'
 import { shortenAddresss } from '../utils/shortenAddress'
 
 type Props = {
-  onProfilePage: boolean
+  onProfilePage?: boolean
   nft: {
     i: number
     name: string

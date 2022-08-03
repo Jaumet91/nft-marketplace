@@ -3,7 +3,7 @@ import { SkeletonHomeAvatar } from './SkeletonHomeAvatar'
 export const SkeletonMyNFTs = () => {
   // TODO: Searchbar
   return (
-    <div className="min-h-screen w-full flex-col items-center justify-start">
+    <div className="min-h-screen w-full animate-pulse flex-col items-center justify-start">
       <div className="flexCenter w-full flex-col">
         <div className="mb-10 flex h-80 w-full items-center justify-center bg-gray-300 dark:bg-slate-700 sm:h-60 xs:h-44 xs:p-4">
           <svg

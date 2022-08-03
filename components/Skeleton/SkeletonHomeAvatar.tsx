@@ -1,5 +1,5 @@
 export const SkeletonHomeAvatar = () => (
-  <div className="flex-col">
+  <div className="animate-pulse flex-col">
     <div className="mt-4 flex items-center">
       <svg
         className="h-14 w-14 text-gray-400 dark:text-gray-600"
