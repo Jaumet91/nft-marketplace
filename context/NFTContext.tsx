@@ -1,11 +1,12 @@
 import { useState, useEffect, createContext } from 'react'
+import { NextRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import { create as ipfsHttpClient, Options } from 'ipfs-http-client'
 
+import { NFTContextProps, props, items } from './interfaces'
 import { MarketAddress, MarketAddressABI } from './constants'
-import { NextRouter } from 'next/router'
 
 type nft = {
   image: string
@@ -15,37 +16,6 @@ type nft = {
   owner: string
   price: string
   seller: string
-}
-
-interface NFTContextProps {
-  nftCurrency: string
-  connectWallet: () => Promise<void>
-  currentAccount: string
-  uploadToIPFS: (file: File) => Promise<string | undefined>
-  createNFT: (
-    formInput: {
-      price: string
-      name: string
-      description: string
-    },
-    fileUrl: string | undefined,
-    router: NextRouter
-  ) => Promise<void>
-  fetchNFTs: () => Promise<any[]>
-  fetchMyNFTsOrListedNFTs: (type?: string) => Promise<any[]>
-  buyNFT: (nft: nft) => Promise<void>
-}
-
-interface props {
-  // eslint-disable-next-line no-undef
-  children: JSX.Element | JSX.Element[]
-}
-
-interface items {
-  tokenId: any
-  seller: string
-  owner: string
-  price: number
 }
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0' as Options)
@@ -126,8 +96,8 @@ export const NFTProvider = ({ children }: props) => {
   const createSale = async (
     url: string,
     formInputPrice: string,
-    isReselling?,
-    id?
+    isReselling?: boolean,
+    id?: string
   ) => {
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
@@ -138,9 +108,13 @@ export const NFTProvider = ({ children }: props) => {
     const contract = fetchContract(signer)
     const listingPrice = await contract.getListingPrice()
 
-    const transaction = await contract.createToken(url, price, {
-      value: listingPrice.toString()
-    })
+    const transaction = !isReselling
+      ? await contract.createToken(url, price, {
+          value: listingPrice.toString()
+        })
+      : await contract.resellToken(id, price, {
+          value: listingPrice.toString()
+        })
 
     await transaction.wait()
   }
@@ -247,7 +221,8 @@ export const NFTProvider = ({ children }: props) => {
         createNFT,
         fetchNFTs,
         fetchMyNFTsOrListedNFTs,
-        buyNFT
+        buyNFT,
+        createSale
       }}>
       {children}
     </NFTContext.Provider>

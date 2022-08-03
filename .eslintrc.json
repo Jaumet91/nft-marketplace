@@ -16,6 +16,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "multiline-ternary": "off",
-    "no-unexpected-multiline": "error"
+    "no-unexpected-multiline": "error",
+    "indent": "off"
   }
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Image from 'next/image'
-import { NFTContext } from '../context/NFTContext'
 
+import { NFTContext } from '../context/NFTContext'
 import { NFTCard, Banner } from '../components'
 import { SkeletonMyNFTs } from '../components/Skeleton'
 import images from '../assets'

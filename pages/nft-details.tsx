@@ -105,7 +105,7 @@ const NFTDetails = () => {
         <div className="mt-10 flex flex-row sm:flex-col">
           {currentAccount === nft.seller.toLowerCase() ? (
             <p className="border border-gray-50 p-2 font-poppins text-base font-normal text-nft-black-1 dark:text-white">
-              You cannot boy your own NFT
+              You cannot buy your own NFT
             </p>
           ) : currentAccount === nft.owner.toLowerCase() ? (
             <Button
@@ -113,7 +113,7 @@ const NFTDetails = () => {
               classStyles="mr-5 sm:mr-0 sm:mb-5 rounded-xl"
               handleClick={() =>
                 router.push(
-                  `/resell-nft?tokenId=${nft.tokenId}$tokenURI=${nft.tokenURI}`
+                  `/resell-nft?tokenId=${nft.tokenId}&tokenURI=${nft.tokenURI}`
                 )
               }
             />
