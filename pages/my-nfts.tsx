@@ -12,6 +12,13 @@ const myNFTs = () => {
   const [nfts, setNfts] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  useEffect(() => {
+    fetchMyNFTsOrListedNFTs().then((items) => {
+      setNfts(items)
+      setIsLoading(false)
+    })
+  }, [])
+
   if (isLoading) {
     return <SkeletonMyNFTs />
   }

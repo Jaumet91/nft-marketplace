@@ -32,7 +32,7 @@ interface NFTContextProps {
     router: NextRouter
   ) => Promise<void>
   fetchNFTs: () => Promise<any[]>
-  fetchMyNFTsOrListedNFTs: (type: string) => Promise<any[]>
+  fetchMyNFTsOrListedNFTs: (type?: string) => Promise<any[]>
   buyNFT: (nft: nft) => Promise<void>
 }
 
@@ -179,7 +179,7 @@ export const NFTProvider = ({ children }: props) => {
     return items
   }
 
-  const fetchMyNFTsOrListedNFTs = async (type: string) => {
+  const fetchMyNFTsOrListedNFTs = async (type?: string) => {
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)

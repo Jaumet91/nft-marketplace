@@ -31,6 +31,7 @@ export const NFTCard = ({ nft }: Props) => {
             layout="fill"
             objectFit="cover"
             alt={`nft${nft.i}`}
+            priority
           />
         </div>
         <div className="mt-3 flex flex-col">
