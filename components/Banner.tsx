@@ -1,6 +1,11 @@
+import { ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
-type Props = { name: string; childStyles: string; parentStyles: string }
+type Props = {
+  name: ReactElement<any, any>
+  childStyles: string
+  parentStyles: string
+}
 
 export const Banner = ({ name, childStyles, parentStyles }: Props) => {
   return (
