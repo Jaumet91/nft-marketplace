@@ -10,22 +10,48 @@ import { shortenAddresss } from '../utils/shortenAddress'
 const myNFTs = () => {
   const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext)
   const [nfts, setNfts] = useState<any[]>([])
+  const [nftsCopy, setNftsCopy] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [activeSelect, setActiveSelect] = useState<string>('Recentky Added')
+  const [activeSelect, setActiveSelect] = useState<string>('Recently listed')
 
   useEffect(() => {
     fetchMyNFTsOrListedNFTs().then((items) => {
       setNfts(items)
+      setNftsCopy(items)
       setIsLoading(false)
     })
   }, [])
+
+  useEffect(() => {
+    const sortedNfts = [...nfts]
+    switch (activeSelect) {
+      case 'Price (low to high)':
+        setNfts(sortedNfts.sort((a, b) => a.price - b.price))
+        break
+      case 'Price (high to low)':
+        setNfts(sortedNfts.sort((a, b) => b.price - a.price))
+        break
+      case 'Recently listed':
+        setNfts(sortedNfts.sort((a, b) => b.tokenId - a.tokenId))
+        break
+      default:
+        setNfts(nfts)
+        break
+    }
+  }, [activeSelect])
 
   const onHandleSearch = (value: string) => {
     const filteredNfts = nfts.filter(({ name }) =>
       name.toLowerCase().includes(value.toLowerCase())
     )
     // eslint-disable-next-line no-unused-expressions
-    filteredNfts.length ? setNfts(filteredNfts) : ''
+    filteredNfts.length ? setNfts(filteredNfts) : setNfts(nftsCopy)
+  }
+
+  const onClearSearch = () => {
+    if (nfts.length && nftsCopy.length) {
+      setNfts(nftsCopy)
+    }
   }
 
   if (isLoading) {
@@ -53,7 +79,7 @@ const myNFTs = () => {
           </p>
         </div>
       </div>
-      {!isLoading && !nfts.length ? (
+      {!isLoading && !nfts.length && !nftsCopy.length ? (
         <div className="flexCenter p-16 sm:p-4">
           <h1 className="font-poppins text-3xl font-extrabold text-nft-black-1 dark:text-white">
             No NFTs Owned
@@ -66,7 +92,7 @@ const myNFTs = () => {
               activeSelect={activeSelect}
               setActiveSelect={setActiveSelect}
               handleSearch={onHandleSearch}
-              // clearSearch={onClearSearch}
+              clearSearch={onClearSearch}
             />
           </div>
           <div className="mt-3 flex w-full flex-wrap">

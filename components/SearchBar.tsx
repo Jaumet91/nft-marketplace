@@ -8,12 +8,14 @@ type Props = {
   activeSelect: string
   setActiveSelect: Dispatch<SetStateAction<string>>
   handleSearch: (value: string) => void
+  clearSearch: () => void
 }
 
 export const SearchBar = ({
   activeSelect,
   setActiveSelect,
-  handleSearch
+  handleSearch,
+  clearSearch
 }: Props) => {
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState(search)
@@ -29,8 +31,7 @@ export const SearchBar = ({
   }, [debouncedSearch])
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    search ? handleSearch(search) : ''
+    search ? handleSearch(search) : clearSearch()
   }, [search])
 
   return (
@@ -57,7 +58,7 @@ export const SearchBar = ({
         onClick={() => setToggle((prevToggle) => !prevToggle)}
         className="flexBetween relative ml-4 min-w-190 cursor-pointer rounded-md border border-nft-gray-2 bg-white px-4 dark:border-nft-black-2 dark:bg-nft-black-2 sm:ml-0 sm:mt-2">
         <p className="font-poppins text-xs font-normal text-nft-black-1 dark:text-white">
-          Recently Listed
+          {activeSelect}
         </p>
         <Image
           src={images.arrow}
@@ -70,13 +71,14 @@ export const SearchBar = ({
         {toggle && (
           <div className="absolute top-full left-0 right-0 z-10 mt-3 w-full rounded-md border-nft-gray-2 bg-white px-4 py-3 dark:border-nft-black-2 dark:bg-nft-black-2">
             {[
-              'Recently added',
+              'Recently listed',
               'Price (low to high)',
               'Price (high to low)'
-            ].map((item, i) => (
+            ].map((item) => (
               <p
-                key={i}
-                className="my-3 cursor-pointer font-poppins text-xs font-normal text-nft-black-1 dark:text-white">
+                key={item}
+                className="my-3 cursor-pointer font-poppins text-xs font-normal text-nft-black-1 dark:text-white"
+                onClick={() => setActiveSelect(item)}>
                 {item}
               </p>
             ))}
