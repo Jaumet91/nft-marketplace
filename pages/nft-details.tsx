@@ -21,6 +21,7 @@ type nft = {
 const NFTDetails = () => {
   const { currentAccount, nftCurrency } = useContext(NFTContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [paymentModal, setPaymentModal] = useState(false)
   const [nft, setNft] = useState<nft>({
     image: '',
     tokenId: '',
@@ -101,17 +102,33 @@ const NFTDetails = () => {
             <Button
               btnName={`Buy for ${nft.price} ${nftCurrency}`}
               classStyles="mr-5 sm:mr-0 rounded-xl"
+              handleClick={() => setPaymentModal(true)}
             />
           )}
         </div>
       </div>
 
-      <Modal
-        header="Check Out"
-        body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />}
-        footer={<div>Custom Footer</div>}
-        handleClick={() => {}}
-      />
+      {paymentModal && (
+        <Modal
+          header="Check Out"
+          body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />}
+          footer={
+            <div className="flex flex-row sm:flex-col">
+              <Button
+                btnName="Checkout"
+                classStyles="mr-5 sm:mb-5 sm:mr-0 rounded-xl"
+                handleClick={() => {}}
+              />
+              <Button
+                btnName="Cancel"
+                classStyles="rounded-xl"
+                handleClick={() => setPaymentModal(false)}
+              />
+            </div>
+          }
+          handleClose={() => setPaymentModal(false)}
+        />
+      )}
     </div>
   )
 }
