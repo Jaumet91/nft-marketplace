@@ -7,7 +7,7 @@ import { Button, Input } from '../components'
 import { SkeletonResellNFTs } from '../components/Skeleton'
 
 const ResellNFT = () => {
-  const { createSale } = useContext(NFTContext)
+  const { createSale, isLoadingNFT } = useContext(NFTContext)
   const router = useRouter()
   const { tokenId, tokenURI } = router.query
   const [price, setPrice] = useState('')
@@ -32,7 +32,7 @@ const ResellNFT = () => {
     router.push('/')
   }
 
-  if (isLoading) return <SkeletonResellNFTs />
+  if (isLoading || isLoadingNFT) return <SkeletonResellNFTs />
 
   return (
     <div className="flex justify-center p-12 sm:px-4">

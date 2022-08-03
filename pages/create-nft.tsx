@@ -12,7 +12,7 @@ import { SkeletonCreateNFTs } from '../components/Skeleton'
 const CreateNFT = () => {
   const router = useRouter()
   const { theme } = useTheme()
-  const { uploadToIPFS, createNFT } = useContext(NFTContext)
+  const { uploadToIPFS, createNFT, isLoadingNFT } = useContext(NFTContext)
   const [mounted, setMounted] = useState(false)
   const [fileUrl, setFileUrl] = useState<string | undefined>(undefined)
   const [formInput, setFormInput] = useState({
@@ -51,7 +51,7 @@ const CreateNFT = () => {
     setMounted(true)
   }, [])
 
-  if (!mounted) return <SkeletonCreateNFTs />
+  if (!mounted || isLoadingNFT) return <SkeletonCreateNFTs />
 
   return (
     <div className="flex justify-center p-12 sm:px-4">

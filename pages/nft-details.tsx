@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { NFTContext } from '../context/NFTContext'
 
-import { NFTCard, Button, Modal, PaymentBodyCmp } from '../components'
+import { Button, Modal, PaymentBodyCmp } from '../components'
 import { SkeletonNFTDetails } from '../components/Skeleton'
 import images from '../assets'
 import { shortenAddresss } from '../utils/shortenAddress'
@@ -20,7 +20,8 @@ type nft = {
 }
 
 const NFTDetails = () => {
-  const { currentAccount, nftCurrency, buyNFT } = useContext(NFTContext)
+  const { currentAccount, nftCurrency, buyNFT, isLoadingNFT } =
+    useContext(NFTContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [paymentModal, setPaymentModal] = useState(false)
   const [successModal, setSuccessModal] = useState(false)
@@ -49,7 +50,7 @@ const NFTDetails = () => {
     setSuccessModal(true)
   }
 
-  if (isLoading) return <SkeletonNFTDetails />
+  if (isLoading || isLoadingNFT) return <SkeletonNFTDetails />
 
   return (
     <div className="relative flex min-h-screen justify-center md:flex-col">

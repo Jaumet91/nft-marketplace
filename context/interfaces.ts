@@ -33,6 +33,7 @@ export interface NFTContextProps {
     isReselling?: boolean,
     id?: string
   ) => Promise<void>
+  isLoadingNFT: boolean
 }
 
 export interface props {
