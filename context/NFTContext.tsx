@@ -7,6 +7,16 @@ import { create as ipfsHttpClient, Options } from 'ipfs-http-client'
 import { MarketAddress, MarketAddressABI } from './constants'
 import { NextRouter } from 'next/router'
 
+type nft = {
+  image: string
+  tokenId: string
+  name: string
+  description: string
+  owner: string
+  price: string
+  seller: string
+}
+
 interface NFTContextProps {
   nftCurrency: string
   connectWallet: () => Promise<void>
@@ -23,6 +33,7 @@ interface NFTContextProps {
   ) => Promise<void>
   fetchNFTs: () => Promise<any[]>
   fetchMyNFTsOrListedNFTs: (type: string) => Promise<any[]>
+  buyNFT: (nft: nft) => Promise<void>
 }
 
 interface props {
@@ -210,6 +221,22 @@ export const NFTProvider = ({ children }: props) => {
     return items
   }
 
+  const buyNFT = async (nft: nft) => {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    const contract = fetchContract(signer)
+    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
+
+    const transaction = await contract.createMarketSale(nft.tokenId, {
+      value: price
+    })
+
+    await transaction.wait()
+  }
+
   return (
     <NFTContext.Provider
       value={{
@@ -219,7 +246,8 @@ export const NFTProvider = ({ children }: props) => {
         uploadToIPFS,
         createNFT,
         fetchNFTs,
-        fetchMyNFTsOrListedNFTs
+        fetchMyNFTsOrListedNFTs,
+        buyNFT
       }}>
       {children}
     </NFTContext.Provider>
