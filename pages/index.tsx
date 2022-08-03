@@ -8,6 +8,7 @@ import { Banner, CreatorCard, NFTCard } from '../components'
 import images from '../assets'
 import { makeId } from '../utils/makeId'
 import { SkeletonHome } from '../components/Skeleton'
+import { getCreators } from '../utils/getTopCreators'
 
 const Home: NextPage = () => {
   const { fetchNFTs } = useContext(NFTContext)
@@ -62,6 +63,8 @@ const Home: NextPage = () => {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const topCreators = getCreators(nfts)
 
   if (!mounted) return <SkeletonHome />
 
