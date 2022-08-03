@@ -2,3 +2,4 @@ yarn.lock
 config.js
 node_modules
 .next
+.env
