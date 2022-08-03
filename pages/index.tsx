@@ -9,6 +9,7 @@ import images from '../assets'
 import { makeId } from '../utils/makeId'
 import { SkeletonHome } from '../components/Skeleton'
 import { getCreators } from '../utils/getTopCreators'
+import { shortenAddresss } from '../utils/shortenAddress'
 
 const Home: NextPage = () => {
   const { fetchNFTs } = useContext(NFTContext)
@@ -84,7 +85,18 @@ const Home: NextPage = () => {
             <div
               className="no-scrollbar flex w-max select-none flex-row overflow-scroll"
               ref={scrollRef}>
-              {[6, 7, 8, 9, 10].map((i) => (
+              {topCreators.map((creator, i) => (
+                <CreatorCard
+                  key={creator.seller}
+                  rank={i + 1}
+                  creatorImage={
+                    images[`creator${i + 1}` as keyof typeof images]
+                  }
+                  creatorName={shortenAddresss(creator.seller)}
+                  creatorEths={creator.sum}
+                />
+              ))}
+              {/* {[6, 7, 8, 9, 10].map((i) => (
                 <CreatorCard
                   key={`creator-${i}`}
                   rank={i}
@@ -92,7 +104,7 @@ const Home: NextPage = () => {
                   creatorName={`0x${makeId(3)}...${makeId(4)}`}
                   creatorEths={10 - i * 0.5}
                 />
-              ))}
+              ))} */}
               {!hideButtons && (
                 <>
                   <div
