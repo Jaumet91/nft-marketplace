@@ -16,6 +16,7 @@ type nft = {
   owner: string
   price: string
   seller: string
+  tokenURI: string
 }
 
 const NFTDetails = () => {
@@ -30,7 +31,8 @@ const NFTDetails = () => {
     description: '',
     owner: '',
     price: '',
-    seller: ''
+    seller: '',
+    tokenURI: ''
   })
   const router = useRouter()
 
@@ -105,10 +107,20 @@ const NFTDetails = () => {
             <p className="border border-gray-50 p-2 font-poppins text-base font-normal text-nft-black-1 dark:text-white">
               You cannot boy your own NFT
             </p>
+          ) : currentAccount === nft.owner.toLowerCase() ? (
+            <Button
+              btnName="List on Marketplace"
+              classStyles="mr-5 sm:mr-0 sm:mb-5 rounded-xl"
+              handleClick={() =>
+                router.push(
+                  `/resell-nft?tokenId=${nft.tokenId}$tokenURI=${nft.tokenURI}`
+                )
+              }
+            />
           ) : (
             <Button
               btnName={`Buy for ${nft.price} ${nftCurrency}`}
-              classStyles="mr-5 sm:mr-0 rounded-xl"
+              classStyles="mr-5 sm:mr-0 sm:mb-5 rounded-xl"
               handleClick={() => setPaymentModal(true)}
             />
           )}
