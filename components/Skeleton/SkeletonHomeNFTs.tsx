@@ -1,5 +1,5 @@
 export const SkeletonHomeNFTs = () => (
-  <div className="w-52">
+  <div className="w-52 animate-pulse">
     <div className="mb-10 flex h-48 items-center justify-center rounded-2xl bg-gray-300 dark:bg-slate-700">
       <svg
         className="h-12 w-12 text-gray-400 dark:text-gray-600"

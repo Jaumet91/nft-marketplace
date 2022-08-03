@@ -8,18 +8,19 @@ import { NFTContext } from '../context/NFTContext'
 import { shortenAddresss } from '../utils/shortenAddress'
 
 type Props = {
+  onProfilePage?: boolean
   nft: {
     i: number
     name: string
     seller: string
     owner: string
     description: string
-    image: any // TODO: Change in the future
-    price: string // TODO: Change in the future
+    image: any
+    price: string
   }
 }
 
-export const NFTCard = ({ nft }: Props) => {
+export const NFTCard = ({ nft, onProfilePage }: Props) => {
   const { nftCurrency } = useContext(NFTContext)
 
   return (
@@ -31,6 +32,7 @@ export const NFTCard = ({ nft }: Props) => {
             layout="fill"
             objectFit="cover"
             alt={`nft${nft.i}`}
+            priority
           />
         </div>
         <div className="mt-3 flex flex-col">
@@ -42,9 +44,7 @@ export const NFTCard = ({ nft }: Props) => {
               {nft.price} <span className="normal">{nftCurrency}</span>
             </p>
             <p className="font-poppins text-sm font-semibold text-nft-black-1 dark:text-white minlg:text-lg">
-              {nft.seller.length > 10
-                ? shortenAddresss(nft.seller)
-                : nft.seller}
+              {shortenAddresss(onProfilePage ? nft.owner : nft.seller)}
             </p>
           </div>
         </div>

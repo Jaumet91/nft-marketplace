@@ -1,8 +1,8 @@
 export const SkeletonNFTDetails = () => {
   return (
-    <div className="relative flex min-h-screen justify-center md:flex-col">
+    <div className="relative flex min-h-screen animate-pulse justify-center md:flex-col">
       <div className="flexCenter relative flex-1 border-r border-nft-gray-1 p-12 dark:border-nft-black-1 md:border-r-0 md:border-b sm:px-4">
-        <div className="relative flex h-557 w-557 animate-pulse items-center justify-center rounded-xl bg-gray-300 dark:bg-slate-700 sm:h-300 sm:w-full minmd:h-2/3 minmd:w-2/3">
+        <div className="relative flex h-557 w-557 items-center justify-center rounded-xl bg-gray-300 dark:bg-slate-700 sm:h-300 sm:w-full minmd:h-2/3 minmd:w-2/3">
           <svg
             className="h-12 w-12 text-gray-400 dark:text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export const SkeletonNFTDetails = () => {
           <div className="mt-2 h-2 w-80 rounded-full bg-gray-300 dark:bg-slate-700"></div>
           <div className="mt-2 h-2 w-48 rounded-full bg-gray-300 dark:bg-slate-700"></div>
           <div className="mt-2 h-2 w-96 rounded-full bg-gray-300 dark:bg-slate-700"></div>
-          <div className="mr-2 mt-8 flex h-9 w-44 animate-pulse cursor-pointer rounded-xl bg-gray-300 dark:bg-slate-700 md:w-full"></div>
+          <div className="mr-2 mt-8 flex h-9 w-44 cursor-pointer rounded-xl bg-gray-300 dark:bg-slate-700 md:w-full"></div>
         </div>
       </div>
     </div>

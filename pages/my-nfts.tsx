@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Image from 'next/image'
-import { NFTContext } from '../context/NFTContext'
 
+import { NFTContext } from '../context/NFTContext'
 import { NFTCard, Banner } from '../components'
 import { SkeletonMyNFTs } from '../components/Skeleton'
 import images from '../assets'
@@ -11,6 +11,13 @@ const myNFTs = () => {
   const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext)
   const [nfts, setNfts] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    fetchMyNFTsOrListedNFTs().then((items) => {
+      setNfts(items)
+      setIsLoading(false)
+    })
+  }, [])
 
   if (isLoading) {
     return <SkeletonMyNFTs />
@@ -50,7 +57,7 @@ const myNFTs = () => {
           </div>
           <div className="mt-3 flex w-full flex-wrap">
             {nfts.map((nft) => (
-              <NFTCard key={nft.tokenId} nft={nft} />
+              <NFTCard key={nft.tokenId} nft={nft} onProfilePage />
             ))}
           </div>
         </div>
