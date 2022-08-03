@@ -1,10 +1,18 @@
-import { useRef } from 'react'
+/* eslint-disable no-undef */
+import { ReactElement, useRef } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
 import images from '../assets'
 
-export const Modal = () => {
+type Props = {
+  header: string
+  body: JSX.Element
+  footer: ReactElement<any, any>
+  handleClick: () => void
+}
+
+export const Modal = ({ header, body, footer, handleClick }: Props) => {
   const modalRef = useRef(null)
   const { theme } = useTheme()
 
@@ -20,6 +28,7 @@ export const Modal = () => {
             <Image
               src={images.cross}
               layout="fill"
+              priority
               className={`cursor-pointer ${
                 theme === 'light' ? ' invert filter' : undefined
               }`}
@@ -29,13 +38,13 @@ export const Modal = () => {
 
         <div className="flexCenter w-full p-4 text-center">
           <h2 className="font-poppins text-2xl font-normal text-nft-black-1 dark:text-white">
-            Header Title
+            {header}
           </h2>
         </div>
         <div className="border-t border-b border-nft-gray-1 p-10 dark:border-nft-black-3 sm:px-4">
-          Body
+          {body}
         </div>
-        <div className="flexCenter p-4">Footer</div>
+        <div className="flexCenter p-4">{footer}</div>
       </div>
     </div>
   )

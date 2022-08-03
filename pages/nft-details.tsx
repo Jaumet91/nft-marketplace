@@ -107,8 +107,10 @@ const NFTDetails = () => {
       </div>
 
       <Modal
-        header="Check Our"
+        header="Check Out"
         body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />}
+        footer={<div>Custom Footer</div>}
+        handleClick={() => {}}
       />
     </div>
   )
