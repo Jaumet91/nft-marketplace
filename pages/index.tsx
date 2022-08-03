@@ -122,7 +122,7 @@ const Home: NextPage = () => {
           <>
             <div>
               <h1 className="sx:ml-0 ml-4 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white minlg:text-4xl">
-                Best Creators
+                Top Sellers
               </h1>
               <div
                 className="relative mt-3 flex max-w-full flex-1"
@@ -187,7 +187,7 @@ const Home: NextPage = () => {
             <div className="mt-10">
               <div className="flexBetween mx-4 sm:flex-col sm:items-start xs:mx-0 minlg:mx-8">
                 <h1 className="flex-1 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white sm:mb-4 minlg:text-4xl">
-                  Hot Bids
+                  Hot NFTs
                 </h1>
                 <div className="flex flex-2 flex-row sm:w-full sm:flex-col">
                   <SearchBar

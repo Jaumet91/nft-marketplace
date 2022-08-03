@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { NextRouter, useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,6 +7,34 @@ import Link from 'next/link'
 import images from '../../assets'
 import { MenuItems, ButtonGroup } from './'
 import { SkeletonNavbar } from '../Skeleton'
+
+const checkActive = (
+  active: string,
+  setActive: Dispatch<SetStateAction<string>>,
+  router: NextRouter
+) => {
+  switch (router.pathname) {
+    case '/':
+      if (active !== 'Explore NFTs') {
+        setActive('Explore NFTs')
+      }
+      break
+    case '/listed-nfts':
+      if (active !== 'Listed NFTs') {
+        setActive('Listed NFTs')
+      }
+      break
+    case '/my-nfts':
+      if (active !== 'My NFTs') {
+        setActive('My NFTs')
+      }
+      break
+    case '/create-nft':
+      break
+    default:
+      setActive('')
+  }
+}
 
 export const Navbar = () => {
   const { theme, setTheme } = useTheme()
@@ -16,9 +44,12 @@ export const Navbar = () => {
   const router = useRouter()
 
   useEffect(() => {
-    setTheme('dark')
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    checkActive(active, setActive, router)
+  }, [router.pathname])
 
   if (!mounted) return <SkeletonNavbar />
 

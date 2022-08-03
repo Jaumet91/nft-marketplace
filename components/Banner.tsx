@@ -12,7 +12,7 @@ export const Banner = ({ name, childStyles, parentStyles }: Props) => {
     <div
       className={`nft-gradient relative z-0 flex items-center overflow-hidden ${parentStyles}`}>
       <p
-        className={`font-poppins text-5xl font-bold leading-70 ${childStyles}`}>
+        className={`font-poppins text-5xl font-bold leading-70 text-white ${childStyles}`}>
         {name}
       </p>
       <div className="white-bg absolute -top-9 -left-16 -z-5 h-48 w-48 rounded-full sm:h-32 sm:w-32" />
@@ -22,7 +22,7 @@ export const Banner = ({ name, childStyles, parentStyles }: Props) => {
 }
 
 Banner.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.object.isRequired,
   childStyles: PropTypes.string.isRequired,
   parentStyles: PropTypes.string.isRequired
 }
