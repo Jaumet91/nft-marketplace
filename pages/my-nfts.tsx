@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import Image from 'next/image'
 
 import { NFTContext } from '../context/NFTContext'
-import { NFTCard, Banner } from '../components'
+import { NFTCard, Banner, SearchBar } from '../components'
 import { SkeletonMyNFTs } from '../components/Skeleton'
 import images from '../assets'
 import { shortenAddresss } from '../utils/shortenAddress'
@@ -11,6 +11,7 @@ const myNFTs = () => {
   const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext)
   const [nfts, setNfts] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [activeSelect, setActiveSelect] = useState<string>('Recentky Added')
 
   useEffect(() => {
     fetchMyNFTsOrListedNFTs().then((items) => {
@@ -18,6 +19,14 @@ const myNFTs = () => {
       setIsLoading(false)
     })
   }, [])
+
+  const onHandleSearch = (value: string) => {
+    const filteredNfts = nfts.filter(({ name }) =>
+      name.toLowerCase().includes(value.toLowerCase())
+    )
+    // eslint-disable-next-line no-unused-expressions
+    filteredNfts.length ? setNfts(filteredNfts) : ''
+  }
 
   if (isLoading) {
     return <SkeletonMyNFTs />
@@ -53,7 +62,12 @@ const myNFTs = () => {
       ) : (
         <div className="flexCenter w-full flex-col p-12 sm:px-4 minmd:w-4/5">
           <div className="flex w-full flex-1 flex-row px-4 sm:flex-col sm:px-0 minlg:px-8">
-            SearchBar
+            <SearchBar
+              activeSelect={activeSelect}
+              setActiveSelect={setActiveSelect}
+              handleSearch={onHandleSearch}
+              // clearSearch={onClearSearch}
+            />
           </div>
           <div className="mt-3 flex w-full flex-wrap">
             {nfts.map((nft) => (

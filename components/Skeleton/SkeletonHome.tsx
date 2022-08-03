@@ -1,5 +1,5 @@
 import { SkeletonHomeAvatar, SkeletonHomeNFTs } from './'
-
+// TODO: Searchbar
 export const SkeletonHome = () => (
   <div className="flex animate-pulse justify-center">
     <div className="w-full flex-col p-12 sm:px-4 minmd:w-4/5">
@@ -15,6 +15,7 @@ export const SkeletonHome = () => (
       </div>
       <div className="flex-col">
         <div className="mb-10 h-4 w-48 rounded-full bg-gray-200 dark:bg-slate-600"></div>
+        <div>SearchBar</div>
         <div className="flex space-x-10">
           <SkeletonHomeAvatar />
           <SkeletonHomeAvatar />
