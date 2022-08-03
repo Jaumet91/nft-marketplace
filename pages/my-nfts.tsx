@@ -12,7 +12,7 @@ const myNFTs = () => {
   const [nfts, setNfts] = useState<any[]>([])
   const [nftsCopy, setNftsCopy] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [activeSelect, setActiveSelect] = useState<string>('Recently listed')
+  const [activeSelect, setActiveSelect] = useState<string>('Order by')
 
   useEffect(() => {
     fetchMyNFTsOrListedNFTs().then((items) => {

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import type { NextPage } from 'next'
 
 import { NFTContext } from '../context/NFTContext'
-import { Banner, CreatorCard, NFTCard } from '../components'
+import { Banner, CreatorCard, NFTCard, SearchBar } from '../components'
 import images from '../assets'
 // import { makeId } from '../utils/makeId'
 import { SkeletonHome } from '../components/Skeleton'
@@ -17,14 +17,49 @@ const Home: NextPage = () => {
   const [mounted, setMounted] = useState(false)
   const [hideButtons, setHideButtons] = useState(false)
   const [nfts, setNfts] = useState<any[]>([])
+  const [nftsCopy, setNftsCopy] = useState<any[]>([])
+  const [activeSelect, setActiveSelect] = useState('Order by')
   const parentRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     fetchNFTs().then((items) => {
       setNfts(items)
+      setNftsCopy(items)
     })
   }, [])
+
+  useEffect(() => {
+    const sortedNfts = [...nfts]
+    switch (activeSelect) {
+      case 'Price (low to high)':
+        setNfts(sortedNfts.sort((a, b) => a.price - b.price))
+        break
+      case 'Price (high to low)':
+        setNfts(sortedNfts.sort((a, b) => b.price - a.price))
+        break
+      case 'Recently listed':
+        setNfts(sortedNfts.sort((a, b) => b.tokenId - a.tokenId))
+        break
+      default:
+        setNfts(nfts)
+        break
+    }
+  }, [activeSelect])
+
+  const onHandleSearch = (value: string) => {
+    const filteredNfts = nfts.filter(({ name }) =>
+      name.toLowerCase().includes(value.toLowerCase())
+    )
+    // eslint-disable-next-line no-unused-expressions
+    filteredNfts.length ? setNfts(filteredNfts) : setNfts(nftsCopy)
+  }
+
+  const onClearSearch = () => {
+    if (nfts.length && nftsCopy.length) {
+      setNfts(nftsCopy)
+    }
+  }
 
   const handleScroll = (direction: string) => {
     const { current } = scrollRef
@@ -65,7 +100,7 @@ const Home: NextPage = () => {
     setMounted(true)
   }, [])
 
-  const topCreators = getCreators(nfts)
+  const topCreators = getCreators(nftsCopy)
 
   if (!mounted) return <SkeletonHome />
 
@@ -144,12 +179,20 @@ const Home: NextPage = () => {
             <h1 className="flex-1 font-poppins text-2xl font-semibold text-nft-black-1 dark:text-white sm:mb-4 minlg:text-4xl">
               Hot Bids
             </h1>
-            <div>SearchBar</div>
+            <div className="flex flex-2 flex-row sm:w-full sm:flex-col">
+              <SearchBar
+                activeSelect={activeSelect}
+                setActiveSelect={setActiveSelect}
+                handleSearch={onHandleSearch}
+                clearSearch={onClearSearch}
+              />
+            </div>
           </div>
           <div className="mt-3 flex w-full flex-wrap justify-start md:justify-center">
             {nfts.map((nft) => (
               <NFTCard key={nft.tokenId} nft={nft} />
             ))}
+
             {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
               <NFTCard
                 key={`nft-${i}`}
