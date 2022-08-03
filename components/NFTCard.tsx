@@ -15,8 +15,8 @@ type Props = {
     seller: string
     owner: string
     description: string
-    image: any // TODO: Change in the future
-    price: string // TODO: Change in the future
+    image: any
+    price: string
   }
 }
 
